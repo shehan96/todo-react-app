@@ -2,6 +2,7 @@ import React from 'react';
 import { useGetTodos } from './http';
 import { Header, Todo } from './components';
 import './App.css';
+import { useGetTodosTest } from './http/repository';
 var config = require('./config.json');
 
 const getSortingStrategy = ({ sortValue }) => {
@@ -9,26 +10,28 @@ const getSortingStrategy = ({ sortValue }) => {
     case 'title':
       return (todos) => todos.sort((a, b) => a.title.localeCompare(b.title));
     case 'completed':
-      return (todos) => todos.sort((a, b) => a.completed - b.completed);
+      return (todos) => todos.sort((a, b) => (a.completed === b.completed ? 0 : a.completed ? -1 : 1));
     default:
       return (todos) => todos.sort((a, b) => a.id - b.id);
   }
 };
 
 export default function App() {
-  const { data, error, isLoading } = useGetTodos();
+  const { data, error, isLoading, refetch } = useGetTodosTest(40);
   const [todos, setTodos] = React.useState([]);
   const [sortValue, setSortValue] = React.useState('');
 
   React.useEffect(() => {
     if (!data) return;
-
     setTodos(data.results);
-  }, [data]);
+  }, [isLoading]);
 
   const sortedTodos = React.useMemo(() => {
     return getSortingStrategy({ sortValue })(todos);
   }, [todos, sortValue]);
+
+  const addMoreData = () => {
+  };
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -71,6 +74,8 @@ export default function App() {
           />
         ))}
       </div>
+
+      <button onClick={addMoreData}>Add More</button>
     </div>
   );
 }
