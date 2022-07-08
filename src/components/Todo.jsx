@@ -90,10 +90,12 @@ export const Todo = ({ todo, onChange, config, isCompleted }) => {
   };
 
   return (
-    <div className='todo' onClick={handleModal}>
+    <div className='todo'>
       <div className='todo_title'>{userName}</div>
 
-      <div className='todo_image'>{getPicture()}</div>
+      <div className='todo_image' onClick={handleModal}>
+        {getPicture()}
+      </div>
 
       <div className='todo_location'>{userLocation}</div>
 
