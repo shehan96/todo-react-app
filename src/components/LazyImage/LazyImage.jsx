@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './LazyImage.css';
-import { useIntersectionObserver } from '../../hooks/hooks';
+import { useIntersectionObserver } from '../../hooks';
 
 /*
  * Image needs a ratio of 1:1 to fit the SVG placeholder.
