@@ -7,7 +7,7 @@ export const Header = ({ todos, data, config, onToggleAll, sortValue, onSortChan
 
   const onChangeHandler = (event) => {
     onSortChange(event.target.value);
-    // config.sorted = true;
+    config.sorted = true;
   };
 
   return (
