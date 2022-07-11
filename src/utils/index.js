@@ -1,0 +1,1 @@
+export { getNames } from './getNames';
