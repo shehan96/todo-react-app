@@ -1,11 +1,12 @@
 import React from 'react';
-import { useGetTodos } from './http';
-import { Header, Todo } from './components';
+import { useGetTodos, useGetMoreTodos } from './http';
+import { Header, Todo, Loader } from './components';
 import './App.css';
-import { useGetTodoMutation } from './http/repository';
 var config = require('./config.json');
 
 const getSortingStrategy = ({ sortValue }) => {
+
+  
   switch (sortValue) {
     case 'title':
       return (todos) => todos.sort((a, b) => a.title.localeCompare(b.title));
@@ -18,9 +19,9 @@ const getSortingStrategy = ({ sortValue }) => {
 
 export default function App() {
   const { data, isLoading, error } = useGetTodos(40);
-  const { mutateAsync: addTodos, isLoading: isMoreDataLoading } = useGetTodoMutation();
   const [todos, setTodos] = React.useState([]);
   const [sortValue, setSortValue] = React.useState('');
+  const { mutateAsync: addTodos, isLoading: isMoreDataLoading } = useGetMoreTodos();
 
   React.useEffect(() => {
     if (!data) return;
@@ -31,14 +32,16 @@ export default function App() {
     return getSortingStrategy({ sortValue })(todos);
   }, [todos, sortValue]);
 
-  const addMoreData = async () => {
+  const addMoreData = () => {
     addTodos(10).then((r) => {
       setTodos([...todos, ...r.results]);
     });
   };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return(
+      <Loader />
+    );
   }
 
   if (error) {
@@ -80,7 +83,7 @@ export default function App() {
       </div>
 
       {isMoreDataLoading ? 'More Data Loading' : <></>}
-      <button onClick={addMoreData}>Add More</button>
+      <button className='btnPrimary' onClick={addMoreData}>Add More</button>
     </div>
   );
 }
