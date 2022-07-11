@@ -4,6 +4,8 @@ export const useIntersectionObserver = (options = { rootMargin: '120px' }) => {
   const ref = React.useRef(null);
   const [isIntersected, setIsIntersected] = React.useState(false);
 
+  const re = null;
+
   React.useEffect(() => {
     const observer = new IntersectionObserver(([element]) => {
       if (element.isIntersecting) {
