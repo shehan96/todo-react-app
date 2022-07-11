@@ -17,3 +17,15 @@
   row-gap: 1rem;
 }
 
+.btnPrimary {
+  padding: 8px 24px;
+  font-size: 16px;
+  font-weight: 900;
+  background: #000;
+  border: none;
+  color: #fff;
+  text-transform: uppercase;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 16px 32px;
+}
