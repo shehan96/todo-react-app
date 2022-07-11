@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { getNames } from '../../utils';
 import { LazyImage } from '../LazyImage';
 import { Location } from '../Location';
 import './Todo.css';
@@ -20,76 +21,13 @@ export const Todo = ({ todo, onChange, config, isCompleted }) => {
     setCompleted(isCompleted);
   }, [isCompleted]);
 
-  React.useEffect(() => {
-    if (config.sorted) {
-      setShownModal(true);
-    }
-  }, [config.sorted]);
-
-  var formattedNames = [];
-
-  const getNames = (names) => {
-    if (names === Object(names)) {
-      // Object here
-      if (names.name != undefined && names.name != null) {
-        if (Object.keys(names.name).length > !2) {
-          for (const [key, value] of Object.entries(names.name)) {
-            formattedNames += value;
-          }
-        } else {
-          for (const [key, value] of Object.entries(names.name)) {
-            formattedNames += key + value;
-          }
-        }
-        return formattedNames;
-      } else {
-        return 'No name';
-      }
-    } else if (Array.isArray(names)) {
-      if (names.name != undefined && names.name != null) {
-        if (names.name.length > !2) {
-          for (const [key, value] of Object.entries(names.name)) {
-            formattedNames += value;
-            return formattedNames;
-          }
-        } else {
-          for (const [key, value] of Object.entries(names.name)) {
-            formattedNames += key + value;
-            return formattedNames;
-          }
-        }
-      } else {
-        return 'No name';
-      }
-    }
-  };
+  // React.useEffect(() => {
+  //   if (config.sorted) {
+  //     setShownModal(true);
+  //   }
+  // }, [config.sorted]);
 
   const userName = useMemo(() => getNames(todo), []);
-
-  /* Remove location function and place it in a component */
-  // const getLocation = ({ location: { street, ...rest } }) => {
-  //   const myStreetName = street.name;
-  //   const myStreetNumber = street.number;
-  //   const myPostcode = rest.postcode;
-  //   const myCity = rest.city;
-  //   const myState = rest.state;
-  //   const myCountry = rest.country;
-
-  //   return (
-  //     <>
-  //       Address: {myStreetName + ' ' + myStreetNumber}
-  //       <br></br>
-  //       <br></br>
-  //       Postcode: {myPostcode}
-  //     </>
-  //   );
-  // };
-
-  // const userLocation = useMemo(() => getLocation(todo), []);
-
-  // const getPicture = () => {
-  //   return <LazyImage src={todo.picture.large} alt={todo.picture.large} />;
-  // };
 
   return (
     <div className='todo'>
