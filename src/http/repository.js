@@ -12,7 +12,7 @@ export const useGetTodos = (noOfResults) => {
   );
 };
 
-export const useGetTodoMutation = () => {
+export const useGetMoreTodos = () => {
   return useMutation((noOfResults) => {
     return ApiClient.get(`https://randomuser.me/api/?results=${noOfResults}`);
   });
