@@ -43,7 +43,14 @@ export const Todo = ({ todo, onChange, config, isCompleted }) => {
       </div>
 
       <span>
-        Completed: <input type='checkbox' checked={completed} className='todo_checked' onChange={onChange} />
+        Completed:{' '}
+        <input
+          type='checkbox'
+          checked={completed}
+          className='todo_checked'
+          onChange={onChange}
+          onClick={(e) => e.stopPropagation()}
+        />
       </span>
 
       <div className={showHideClassName}>
