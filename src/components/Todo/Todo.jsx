@@ -6,7 +6,7 @@ import './Todo.css';
 
 export const Todo = ({ todo, onChange, config, isCompleted }) => {
   const [showModal, setShownModal] = React.useState(false);
-  const [completed, setCompleted] = React.useState(false);
+  // const [completed, setCompleted] = React.useState(false);
   const showHideClassName = showModal ? 'modal display-block' : 'modal display-none';
 
   const handleModal = () => {
@@ -17,9 +17,9 @@ export const Todo = ({ todo, onChange, config, isCompleted }) => {
     setShownModal(false);
   };
 
-  React.useEffect(() => {
-    setCompleted(isCompleted);
-  }, [isCompleted]);
+  // React.useEffect(() => {
+  //   setCompleted(isCompleted);
+  // }, [isCompleted]);
 
   // React.useEffect(() => {
   //   if (config.sorted) {
@@ -46,7 +46,7 @@ export const Todo = ({ todo, onChange, config, isCompleted }) => {
         Completed:{' '}
         <input
           type='checkbox'
-          checked={completed}
+          checked={isCompleted}
           className='todo_checked'
           onChange={onChange}
           onClick={(e) => e.stopPropagation()}
