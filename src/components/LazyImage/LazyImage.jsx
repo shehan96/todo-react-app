@@ -36,9 +36,6 @@ export const LazyImage = ({ src, alt, color = '#F3F5F7' }) => {
           console.log(error);
         });
     }
-    else{
-      console.log('No image');
-    }
   }, [isIntersected]);
 
   return (
