@@ -5,8 +5,6 @@ import './App.css';
 var config = require('./config.json');
 
 const getSortingStrategy = ({ sortValue }) => {
-
-  
   switch (sortValue) {
     case 'title':
       return (todos) => todos.sort((a, b) => a.title.localeCompare(b.title));
@@ -39,9 +37,7 @@ export default function App() {
   };
 
   if (isLoading) {
-    return(
-      <Loader />
-    );
+    return <Loader />;
   }
 
   if (error) {
@@ -72,7 +68,7 @@ export default function App() {
             key={todo.login.uuid}
             todo={todo}
             config={config}
-            isCompleted={todo.completed}
+            isCompleted={todo.completed === undefined ? false : todo.completed}
             onChange={() => {
               setTodos((curr) => {
                 return curr.map((item, i) => (i === idx ? { ...item, completed: !item.completed } : item));
@@ -83,7 +79,9 @@ export default function App() {
       </div>
 
       {isMoreDataLoading ? 'More Data Loading' : <></>}
-      <button className='btnPrimary' onClick={addMoreData}>Add More</button>
+      <button className='btnPrimary' onClick={addMoreData}>
+        Add More
+      </button>
     </div>
   );
 }
