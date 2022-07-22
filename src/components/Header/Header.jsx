@@ -3,7 +3,7 @@ import './Header.css';
 
 export const Header = ({ todos, data, config, onToggleAll, sortValue, onSortChange }) => {
   const completedTodosCount = todos.filter((todo) => todo.completed).length;
-  const areAllTodosCompleted = completedTodosCount === data?.length;
+  const areAllTodosCompleted = completedTodosCount === todos?.length;
 
   const onChangeHandler = (event) => {
     onSortChange(event.target.value);
